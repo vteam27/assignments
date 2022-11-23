@@ -1,0 +1,39 @@
+#include<stdio.h>
+#include<stdlib.h>
+int main()
+{
+    int arr[100],i,n,Time=0,initial,count=0;
+    printf("Enter the number of Requests ~ ");
+    scanf("%d",&n);
+    
+    printf("Enter the Sequence ~ ");
+    for(i=0;i<n;i++)
+     scanf("%d",&arr[i]);
+    
+    printf("Initial head ~ ");
+    scanf("%d",&initial);
+    
+    while(count!=n)
+    {
+        int max=((arr[n-1])+10),sum,index;
+        
+        for(i=0;i<n;i++)
+        {
+           sum=abs(arr[i]-initial);
+           if(max>sum)
+           {
+               max=sum;
+               index=i;
+           }
+           
+        }
+        Time=Time+max;
+        initial=arr[index];
+        
+        arr[index]=200;
+        count++;
+    }
+    
+    printf("Time taken is ~ %d",Time);
+    return 0;
+}

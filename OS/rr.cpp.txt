@@ -1,0 +1,65 @@
+#include <iostream>
+using namespace std;
+
+struct pcb
+{
+    int bt, wt, tt, name;
+
+    // bt burst time
+    // wt waiting time
+    // tt total time
+    // name is like p1,p2
+};
+int main()
+{
+    int n, sum = 0; // cheap trick sum mei
+    cout << "Enter the number of proccess:";
+    cin >> n;
+    struct pcb a[n];
+    for (int i = 0; i < n; i++)
+    {
+        a[i].name = i;
+        cout << "Enter the Burst time of P" << i << ":";
+        cin >> a[i].bt;
+        a[i].wt = -a[i].bt;
+        sum += a[i].bt;
+    }
+    int timeSlice;
+    cout << "Enter the time Slice:";
+    cin >> timeSlice;
+    // bool flag = true;
+    int time = 0, i = 0;
+    while (time < sum)
+    {
+
+        if (a[i].bt > 0)
+        {
+            if (a[i].bt - timeSlice > 0)
+            {
+                a[i].bt -= timeSlice;
+                time += timeSlice;
+            }
+            else if (a[i].bt - timeSlice <= 0)
+            {
+
+                time += a[i].bt;
+                a[i].bt = 0;
+                a[i].tt = time;
+                a[i].wt += a[i].tt;
+            }
+        }
+        // cout << time << " ";
+
+        i++;
+        i = i % n;
+    }
+
+    // printing data now
+    for (int i = 0; i < n; i++)
+    {
+        cout << "p" << a[i].name << ":" << endl;
+        cout << "TT:" << a[i].tt << endl;
+        cout << "WT:" << a[i].wt << endl;
+    }
+    return 0;
+}

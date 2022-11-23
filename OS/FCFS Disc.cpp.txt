@@ -1,0 +1,36 @@
+#include <iostream>
+#include<math.h>
+using namespace std;
+#define size 8
+
+int main()
+{
+    int arr[size],head;
+    
+    cout<<"Enter the Head position ~ ";
+    cin>>head;
+    
+    cout<<"Enter the Sequence ~ ";
+    for(int i=0;i<size;i++)
+      cin>>arr[i];
+
+    cout<<"Sequece Start point is 0 and End point is "<<(arr[size-1])+10<<endl;
+    
+    cout<<"It Move from "<<head<<" to ";
+    for(int j=0;j<size;j++)
+    {
+        cout<<arr[j]<<"  ";
+    }
+    cout<<endl;
+    
+    int sum=0;
+    sum=abs((head)-(arr[0]));
+    for(int k=0;k<size-1;k++)
+    {
+        sum = sum + abs((arr[k])-(arr[k+1]));
+    }
+    cout<<sum;
+
+
+    return 0;
+}

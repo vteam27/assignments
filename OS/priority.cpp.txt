@@ -1,0 +1,68 @@
+#include <iostream>
+using namespace std;
+
+struct pcb
+{
+    int at, bt, wt, tt, name, p;
+    // at- arival time
+    // bt burst time
+    // wt waiting time
+    // tt total time
+    // name is like p1,p2
+    // p -priority
+};
+int main()
+{
+    int n;
+    cout << "Enter the number of proccess:";
+    cin >> n;
+    struct pcb a[n];
+    for (int i = 0; i < n; i++)
+    {
+        a[i].name = i;
+        cout << "Enter the Priority of P" << i << ":";
+        cin >> a[i].p;
+        cout << "Enter the Burst time of P" << i << ":";
+        cin >> a[i].bt;
+    }
+
+    // now we have information about arrival and burst times
+    // now sort based on arrival time
+    for (int i = 0; i < n - 1; i++)
+    {
+        int max = i;
+        for (int j = i + 1; j < n; j++)
+        {
+            if (a[max].p < a[j].p)
+            {
+                max = j;
+            }
+        }
+        if (max != i)
+        {
+            struct pcb temp;
+            temp = a[max];
+            a[max] = a[i];
+            a[i] = temp;
+        }
+    }
+
+    // sort kar liya
+
+    // calculation of  turnaround time
+    int time = 0;
+    for (int i = 0; i < n; i++)
+    {
+        time += a[i].bt;
+        a[i].tt = time;
+        a[i].wt = time - a[i].bt;
+    }
+    // printing data now
+    for (int i = 0; i < n; i++)
+    {
+        cout << "p" << a[i].name << ":" << endl;
+        cout << "TT:" << a[i].tt << endl;
+        cout << "WT:" << a[i].wt << endl;
+    }
+    return 0;
+}
